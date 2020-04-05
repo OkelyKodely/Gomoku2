@@ -65,13 +65,13 @@ public class Go extends JPanel implements MouseListener, MouseMotionListener {
 
         if(turn.equals("white")) {
             g.setColor(Color.WHITE);
-            g.fillOval(x*40-40, y*40-40, 40, 40);
+            g.drawOval(x*40-40+5, y*40-40+5, 30, 30);
             turnLbl.setText("TURN: " + turn);
         }
 
         if(turn.equals("black")) {
             g.setColor(Color.BLACK);
-            g.fillOval(x*40-40, y*40-40, 40, 40);
+            g.drawOval(x*40-40+5, y*40-40+5, 30, 30);
             turnLbl.setText("TURN: " + turn);
         }
     }
@@ -86,11 +86,11 @@ public class Go extends JPanel implements MouseListener, MouseMotionListener {
         y = (int)((double)e.getY()/(double)40) - 1;
         if(turn.equals("white")) {
             g.setColor(Color.WHITE);
-            g.fillOval(x*40-40, y*40-40, 40, 40);
+            g.drawOval(x*40-40+5, y*40-40+5, 30, 30);
         }
         if(turn.equals("black")) {
             g.setColor(Color.BLACK);
-            g.fillOval(x*40-40, y*40-40, 40, 40);
+            g.drawOval(x*40-40+5, y*40-40+5, 30, 30);
         }
         repaint();
     }
@@ -101,7 +101,6 @@ public class Go extends JPanel implements MouseListener, MouseMotionListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        turnLbl.setText("TURN: " + turn);
         
         if(e.getSource() instanceof JButton) {
             initBoard();
@@ -117,6 +116,7 @@ public class Go extends JPanel implements MouseListener, MouseMotionListener {
                         g.fillOval(x*40-40, y*40-40, 40, 40);
                         board[y-1][x-1] = turn;
                         turn = "black";
+                        turnLbl.setText("TURN: " + turn);
                     }
                 }
             }
@@ -129,6 +129,7 @@ public class Go extends JPanel implements MouseListener, MouseMotionListener {
                         g.fillOval(x*40-40, y*40-40, 40, 40);
                         board[y-1][x-1] = turn;
                         turn = "white";
+                        turnLbl.setText("TURN: " + turn);
                     }
                 }
             }
