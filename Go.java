@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -16,6 +17,8 @@ public class Go extends JPanel implements MouseListener, MouseMotionListener {
     Graphics g = null;
     String turn = "white";
     String board[][] = new String[19][19];
+    JLabel turnLbl = new JLabel();
+    int x, y;    
     
     public Go() {
         
@@ -31,7 +34,7 @@ public class Go extends JPanel implements MouseListener, MouseMotionListener {
             }
         }
     }
-    
+
     public void paint(Graphics g) {
 
         g.setColor(new Color(200,150,55));
@@ -59,6 +62,18 @@ public class Go extends JPanel implements MouseListener, MouseMotionListener {
                 }
             }
         }
+
+        if(turn.equals("white")) {
+            g.setColor(Color.WHITE);
+            g.fillOval(x*40-40, y*40-40, 40, 40);
+            turnLbl.setText("TURN: " + turn);
+        }
+
+        if(turn.equals("black")) {
+            g.setColor(Color.BLACK);
+            g.fillOval(x*40-40, y*40-40, 40, 40);
+            turnLbl.setText("TURN: " + turn);
+        }
     }
     
     @Override
@@ -67,8 +82,8 @@ public class Go extends JPanel implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        int x = (int)((double)e.getX()/(double)40);
-        int y = (int)((double)e.getY()/(double)40) - 1;
+        x = (int)((double)e.getX()/(double)40);
+        y = (int)((double)e.getY()/(double)40) - 1;
         if(turn.equals("white")) {
             g.setColor(Color.WHITE);
             g.fillOval(x*40-40, y*40-40, 40, 40);
@@ -86,6 +101,8 @@ public class Go extends JPanel implements MouseListener, MouseMotionListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
+        turnLbl.setText("TURN: " + turn);
+        
         if(e.getSource() instanceof JButton) {
             initBoard();
             repaint();
@@ -261,6 +278,10 @@ public class Go extends JPanel implements MouseListener, MouseMotionListener {
         
         j.setBounds(0, 0, 1600, 950);
         
+        turnLbl.setBounds(300, 10, 300, 20);
+        
+        turnLbl.setText("TURN: " + turn);
+        
         JPanel pp = new JPanel();
         pp.setLayout(null);
         pp.setBackground(Color.WHITE);
@@ -269,6 +290,8 @@ public class Go extends JPanel implements MouseListener, MouseMotionListener {
         this.setBounds(40, 40, 760, 760);
         
         pp.add(this);
+        
+        pp.add(turnLbl);
         
         JButton b = new JButton("New Start. - 새로 시작");
         b.setBounds(40, 10, 163, 20);
