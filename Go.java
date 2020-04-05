@@ -1,15 +1,6 @@
-
-
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 public class Go extends JPanel implements MouseListener, MouseMotionListener {
 
@@ -40,7 +31,7 @@ public class Go extends JPanel implements MouseListener, MouseMotionListener {
         g.setColor(new Color(200,150,55));
         g.fillRect(0, 0, 760, 760);
         
-        g.setColor(Color.BLACK);
+        g.setColor(Color.gray);
         for(int i=0; i<19; i++) {
             g.drawLine(0, i*40, 760, i*40);
         }
@@ -78,6 +69,7 @@ public class Go extends JPanel implements MouseListener, MouseMotionListener {
     
     @Override
     public void mouseDragged(MouseEvent e) {
+        return;
     }
 
     @Override
@@ -97,6 +89,7 @@ public class Go extends JPanel implements MouseListener, MouseMotionListener {
         
     @Override
     public void mouseClicked(MouseEvent e) {
+        return;
     }
 
     @Override
@@ -142,14 +135,17 @@ public class Go extends JPanel implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        return;
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
+        return;
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
+        return;
     }
 
     void figureOutWhoWon() throws Exception {
@@ -304,14 +300,28 @@ public class Go extends JPanel implements MouseListener, MouseMotionListener {
         j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         j.setVisible(true);
+        j.setExtendedState(j.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 
-        g = getGraphics();
+        setGraphics();
         
         j.addMouseListener(this);
         j.addMouseMotionListener(this);
     }
     
+    void setGraphics() {
+        
+        g = this.getGraphics();
+    }
+    
     public static void main(String[] args) {
-        new Go();
+        
+         try {
+            SwingUtilities.invokeAndWait(new Runnable() {
+                @Override
+                public void run() {
+                    Go g = new Go();
+                }
+            });
+        } catch(Exception e) {}
     }
 }
