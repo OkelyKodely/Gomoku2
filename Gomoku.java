@@ -45,24 +45,24 @@ public class Gomoku extends JPanel implements MouseListener, MouseMotionListener
             for(int j=0; j<19; j++) {
                 if(board[i][j].equals("white")) {
                     g.setColor(Color.WHITE);
-                    g.fillOval(j*40, i*40, 40, 40);
+                    g.fillOval(j*40-40-20, i*40-20, 40, 40);
                 }
                 else if(board[i][j].equals("black")) {
                     g.setColor(Color.BLACK);
-                    g.fillOval(j*40, i*40, 40, 40);
+                    g.fillOval(j*40-40-20, i*40-20, 40, 40);
                 }
             }
         }
 
         if(turn.equals("white")) {
             g.setColor(Color.WHITE);
-            g.drawOval(x*40-40+5, y*40-40+5, 30, 30);
+            g.drawOval(x*40-40-20+5, y*40-20+5, 30, 30);
             turnLbl.setText("TURN: " + turn);
         }
 
         if(turn.equals("black")) {
             g.setColor(Color.BLACK);
-            g.drawOval(x*40-40+5, y*40-40+5, 30, 30);
+            g.drawOval(x*40-40-20+5, y*40-20+5, 30, 30);
             turnLbl.setText("TURN: " + turn);
         }
     }
@@ -78,11 +78,11 @@ public class Gomoku extends JPanel implements MouseListener, MouseMotionListener
         y = (int)((double)e.getY()/(double)40) - 1;
         if(turn.equals("white")) {
             g.setColor(Color.WHITE);
-            g.drawOval(x*40-40+5, y*40-40+5, 30, 30);
+            g.drawOval(x*40-20-40+5, y*40-20+5, 30, 30);
         }
         if(turn.equals("black")) {
             g.setColor(Color.BLACK);
-            g.drawOval(x*40-40+5, y*40-40+5, 30, 30);
+            g.drawOval(x*40-20-40+5, y*40-20+5, 30, 30);
         }
         repaint();
     }
@@ -104,10 +104,10 @@ public class Gomoku extends JPanel implements MouseListener, MouseMotionListener
                 int x = (int)((double)e.getX()/(double)40);
                 int y = (int)((double)e.getY()/(double)40) - 1;
                 if(x < 20 && y < 20) {
-                    if(board[y-1][x-1].equals("")) {
+                    if(board[y][x].equals("")) {
                         g.setColor(Color.WHITE);
-                        g.fillOval(x*40-40, y*40-40, 40, 40);
-                        board[y-1][x-1] = turn;
+                        g.fillOval(x*40-20-40, y*40-20, 40, 40);
+                        board[y][x] = turn;
                         turn = "black";
                         turnLbl.setText("TURN: " + turn);
                     }
@@ -117,10 +117,10 @@ public class Gomoku extends JPanel implements MouseListener, MouseMotionListener
                 int x = (int)((double)e.getX()/(double)40);
                 int y = (int)((double)e.getY()/(double)40) - 1;
                 if(x < 20 && y < 20) {
-                    if(board[y-1][x-1].equals("")) {
+                    if(board[y][x].equals("")) {
                         g.setColor(Color.BLACK);
-                        g.fillOval(x*40-40, y*40-40, 40, 40);
-                        board[y-1][x-1] = turn;
+                        g.fillOval(x*40-20-40, y*40-20, 40, 40);
+                        board[y][x] = turn;
                         turn = "white";
                         turnLbl.setText("TURN: " + turn);
                     }
